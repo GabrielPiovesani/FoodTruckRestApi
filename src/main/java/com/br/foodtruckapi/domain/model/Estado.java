@@ -8,19 +8,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Data
 @Entity
+@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Cozinha {
+public class Estado {
 
     @Id
-    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
-    private String nome;
-
+    private String nomeEstado;
 
 
 
 }
+
