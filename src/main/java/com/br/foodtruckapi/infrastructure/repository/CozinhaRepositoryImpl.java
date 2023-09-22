@@ -2,6 +2,7 @@ package com.br.foodtruckapi.infrastructure.repository;
 
 import com.br.foodtruckapi.domain.model.Cozinha;
 import com.br.foodtruckapi.domain.repository.CozinhaRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -33,13 +34,20 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
     }
 
     @Override
+    @Transactional
     public Cozinha salvar(Cozinha cozinha) {
         return manager.merge(cozinha);
     }
 
     @Override
-    public void remover(Cozinha cozinha) {
-    cozinha = buscarPorId(cozinha.getId());
-    manager.remove(cozinha);
+    @Transactional
+    public void remover(Long id) {
+       Cozinha cozinha = buscarPorId(id);
+
+        if (cozinha == null){
+            throw new EmptyResultDataAccessException(1);
+        }
+
+        manager.remove(cozinha);
     }
 }
